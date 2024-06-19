@@ -1,0 +1,22 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/create_user', methods=['POST'])
+def api_create_user():
+    data = request.json
+    user = create_user(data['email'], data['password'], data['connection'])
+    return jsonify(user)
+
+@app.route('/get_user/<user_id>', methods=['GET'])
+def api_get_user(user_id):
+    user = get_user(user_id)
+    return jsonify(user)
+
+@app.route('/delete_user/<user_id>', methods=['DELETE'])
+def api_delete_user(user_id):
+    delete_user(user_id)
+    return '', 204
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
