@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth0-crud-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth0-crud
+  template:
+    metadata:
+      labels:
+        app: auth0-crud
+    spec:
+      containers:
+      - name: auth0-crud-container
+        image: your-docker-image:latest
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth0-crud-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: auth0-crud
