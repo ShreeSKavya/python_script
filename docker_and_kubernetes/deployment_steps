@@ -1,0 +1,6 @@
+1.Build Docker Image:
+      docker build -t your-docker-image .
+2.Push Docker Image to a Registry:
+        docker push your-docker-image
+3.Deploy to Kubernetes:
+        kubectl apply -f deployment.yaml
